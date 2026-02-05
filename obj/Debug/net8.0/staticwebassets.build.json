@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0ZE5uf4ZaYMP0uhsqsp6TUr9kCpWuZHEPe6hfuMevnk=",
+  "Source": "GerenciadorPresenca",
+  "BasePath": "_content/GerenciadorPresenca",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
