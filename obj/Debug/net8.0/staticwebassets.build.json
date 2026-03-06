@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "0ZE5uf4ZaYMP0uhsqsp6TUr9kCpWuZHEPe6hfuMevnk=",
-  "Source": "GerenciadorPresenca",
-  "BasePath": "_content/GerenciadorPresenca",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"0x7WghvmON3yc8WUA/OLl5TlnPlpm0B3SKV425GNfA4=","Source":"GerenciadorPresenca","BasePath":"_content/GerenciadorPresenca","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
