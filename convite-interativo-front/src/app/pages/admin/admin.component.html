@@ -1,1 +1,52 @@
-<p>admin works!</p>
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Cabeçalho -->
+    <h1 class="text-4xl font-bold text-center text-blue-800 mb-8">Convidados Confirmados 🎉</h1>
+
+    <!-- Loading -->
+    <div *ngIf="carregando" class="text-center text-gray-600">Carregando...</div>
+
+    <!-- Lista de convidados -->
+    <div *ngIf="!carregando" class="bg-white rounded-lg shadow-lg p-6">
+      <!-- Se não tiver nenhum convidado -->
+      <p *ngIf="convidados.length === 0" class="text-center text-gray-500">
+        Nenhum convidado confirmou presença ainda.
+      </p>
+
+      <!-- Tabela de convidados -->
+      <table *ngIf="convidados.length > 0" class="w-full">
+        <thead>
+          <tr class="border-b-2 border-blue-200">
+            <th class="text-left py-3 px-4 text-blue-800 font-semibold">ID</th>
+            <th class="text-left py-3 px-4 text-blue-800 font-semibold">Nome</th>
+            <th class="text-left py-3 px-4 text-blue-800 font-semibold">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let convidado of convidados"
+            class="border-b border-gray-200 hover:bg-blue-50"
+          >
+            <td class="py-3 px-4 text-gray-700">{{ convidado.id }}</td>
+            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nome }}</td>
+            <td class="py-3 px-4">
+              <span
+                class="px-3 py-1 rounded-full text-sm font-semibold"
+                [class]="
+                  convidado.confirmado ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                "
+              >
+                {{ convidado.confirmado ? '✅ Confirmado' : '❌ Não confirmado' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Total de convidados -->
+      <div *ngIf="convidados.length > 0" class="mt-6 text-center text-gray-600">
+        <strong>Total:</strong> {{ convidados.length }} convidado(s)
+      </div>
+    </div>
+  </div>
+</div>

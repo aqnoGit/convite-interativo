@@ -9,12 +9,12 @@ export interface Convidado {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConvidadoService {
   private apiUrl = 'http://localhost:5000/gerenciadorPresenca';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Listar todos os convidados
   getConvidados(): Observable<Convidado[]> {

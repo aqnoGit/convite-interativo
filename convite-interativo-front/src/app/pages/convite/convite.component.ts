@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ConvidadoService } from '../../services/convidado.service';
 import { CommonModule } from '@angular/common';
+import { ConvidadoService } from '../../services/convidado.service';
 
 @Component({
   selector: 'app-convite',
@@ -24,23 +24,27 @@ export class ConviteComponent {
 
     const convidado = {
       nome: this.nomeConvidado,
-      confirmado: true
+      confirmado: true,
     };
 
     this.convidadoService.addConvidado(convidado).subscribe({
       next: () => {
         this.mostrarMensagem('Presença confirmada com sucesso! 🎉', true);
-        this.nomeConvidado = '';
+
+        // Limpar campo após 3 segundos
+        setTimeout(() => {
+          this.nomeConvidado = '';
+          this.showMensagem = false;
+        }, 3000);
       },
       error: () => {
         this.mostrarMensagem('Erro ao confirmar presença. Tente novamente.', false);
-      }
+      },
     });
   }
 
   mostrarMensagem(msg: string, sucesso: boolean) {
     this.mensagem = msg;
     this.showMensagem = true;
-    setTimeout(() => this.showMensagem = false, 3000);
   }
 }

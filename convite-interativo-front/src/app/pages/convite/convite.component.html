@@ -1,38 +1,92 @@
-<div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-cyan-400 to-blue-500">
-  <!-- Container do convite -->
-  <div class="relative max-w-md w-full">
-    <!-- Imagem do convite -->
-    <img 
-      src="fundoteste.png"
-      alt="Convite de aniversário" 
-      class="w-full rounded-3xl shadow-2xl"
-    >
-    
-    <!-- Formulário sobreposto -->
-    <div class="absolute bottom-8 left-0 right-0 px-8">
-      <!-- Campo de nome -->
-      <input 
-        type="text" 
-        [(ngModel)]="nomeConvidado"
-        placeholder="Digite seu nome"
-        class="w-full px-4 py-3 rounded-xl border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-center text-lg font-semibold shadow-lg mb-4"
-      >
-      
-      <!-- Botão confirmar -->
-      <button 
-        (click)="confirmarPresenca()"
-        class="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-lg"
-      >
-        🎉 Confirmar Presença 🎉
-      </button>
-    </div>
+<div
+  class="min-h-screen bg-gradient-to-br from-cyan-400 via-blue-400 to-blue-500 flex items-center justify-center p-4"
+>
+  <!-- Container principal -->
+  <div class="max-w-6xl w-full">
+    <!-- Grid de 2 colunas (desktop) / 1 coluna (mobile) -->
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <!-- COLUNA ESQUERDA: Imagem do convite -->
+      <div class="order-1">
+        <div class="transform hover:scale-105 transition-transform duration-300">
+          <img
+            src="assets/fundoteste.png"
+            alt="Convite de aniversário"
+            class="w-full rounded-3xl shadow-2xl"
+          />
+        </div>
+      </div>
 
-    <!-- Mensagem de sucesso/erro -->
-    <div 
-      *ngIf="showMensagem"
-      class="absolute top-4 left-4 right-4 bg-white border-2 border-green-500 rounded-xl p-4 shadow-lg text-center font-bold text-green-700 animate-bounce"
-    >
-      {{ mensagem }}
+      <!-- COLUNA DIREITA: Formulário -->
+      <div class="order-2">
+        <div
+          class="bg-white rounded-3xl shadow-2xl p-6"
+          style="
+            height: 370px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          "
+        >
+          <!-- Cabeçalho -->
+          <div class="text-center">
+            <div class="text-4xl mb-2">🎉</div>
+            <h2 class="text-2xl font-bold text-cyan-600 mb-1">Confirme sua Presença!</h2>
+            <p class="text-gray-600 text-sm">Vai ser uma festa inesquecível! 🐙🐢</p>
+          </div>
+
+          <!-- Decoração temática -->
+          <div class="flex justify-center gap-3 text-3xl -my-2">
+            <span class="animate-bounce delay-0">🐙</span>
+            <span class="animate-bounce delay-100">🐢</span>
+            <span class="animate-bounce delay-200">🐠</span>
+            <span class="animate-bounce delay-300">⭐</span>
+          </div>
+
+          <!-- Formulário -->
+          <div class="space-y-3">
+            <!-- Campo nome -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-1 text-left text-sm">
+                👤 Seu nome:
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="nomeConvidado"
+                placeholder="Digite seu nome completo"
+                class="w-full px-3 py-2 rounded-xl border-2 border-cyan-300 focus:border-cyan-500 focus:outline-none text-base transition-colors"
+                (keyup.enter)="confirmarPresenca()"
+              />
+            </div>
+
+            <!-- Botão confirmar -->
+            <button
+              (click)="confirmarPresenca()"
+              class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-base"
+            >
+              🌊 Confirmar Presença 🌊
+            </button>
+          </div>
+
+          <!-- Mensagem de sucesso/erro -->
+          <div
+            *ngIf="showMensagem"
+            class="bg-green-100 border-2 border-green-500 rounded-xl p-2 text-center"
+          >
+            <p class="text-green-700 font-bold text-sm">{{ mensagem }}</p>
+          </div>
+        </div>
+
+        <!-- Card com QR Code PIX -->
+        <div class="mt-4 bg-white rounded-2xl shadow-lg p-4 text-center">
+          <p class="text-cyan-600 font-bold text-sm mb-3">🎁 Gostaria de levar um presente?</p>
+          <img
+            src="assets/qrcode-pix.png"
+            alt="QR Code PIX"
+            class="mx-auto w-32 h-32 rounded-lg shadow-md"
+          />
+          <p class="text-gray-500 text-xs mt-2">Escaneie o QR Code para fazer um PIX 💙</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
