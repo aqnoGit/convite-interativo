@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\source\\repos\\Invitation-project\\convite-interativo\\GerenciadorPresenca.csproj": {}
+    "C:\\Users\\mateu\\source\\repos\\convite-interativo\\GerenciadorPresenca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\source\\repos\\Invitation-project\\convite-interativo\\GerenciadorPresenca.csproj": {
+    "C:\\Users\\mateu\\source\\repos\\convite-interativo\\GerenciadorPresenca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\source\\repos\\Invitation-project\\convite-interativo\\GerenciadorPresenca.csproj",
+        "projectUniqueName": "C:\\Users\\mateu\\source\\repos\\convite-interativo\\GerenciadorPresenca.csproj",
         "projectName": "GerenciadorPresenca",
-        "projectPath": "C:\\Users\\mateu\\source\\repos\\Invitation-project\\convite-interativo\\GerenciadorPresenca.csproj",
+        "projectPath": "C:\\Users\\mateu\\source\\repos\\convite-interativo\\GerenciadorPresenca.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\source\\repos\\Invitation-project\\convite-interativo\\obj\\",
+        "outputPath": "C:\\Users\\mateu\\source\\repos\\convite-interativo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,17 +50,21 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.23, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.0, )"
             },
