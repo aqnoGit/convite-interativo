@@ -53,7 +53,7 @@ namespace GerenciadorPresenca.Controllers
         }
 
         [HttpGet("test-connection")]
-        public IActionResult TestConnection()
+        public async Task<IActionResult> TestConnection()
         {
             try
             {
@@ -64,20 +64,22 @@ namespace GerenciadorPresenca.Controllers
                     return BadRequest(new { error = "Connection string está vazia!" });
                 }
                 
-                // Não mostrar a senha completa
-                var safe = connString.Substring(0, Math.Min(50, connString.Length)) + "...";
+                // Testar se consegue conectar no banco
+                var canConnect = await _context.Database.CanConnectAsync();
                 
                 return Ok(new { 
-                    message = "Connection string encontrada!",
-                    preview = safe,
-                    length = connString.Length
+                    message = "Teste completo!",
+                    connectionStringLength = connString.Length,
+                    canConnect = canConnect,
+                    preview = connString.Substring(0, Math.Min(50, connString.Length)) + "..."
                 });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { 
                     error = ex.Message,
-                    type = ex.GetType().Name
+                    type = ex.GetType().Name,
+                    stackTrace = ex.StackTrace
                 });
             }
         } 
