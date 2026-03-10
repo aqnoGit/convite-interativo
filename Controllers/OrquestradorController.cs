@@ -52,7 +52,6 @@ namespace GerenciadorPresenca.Controllers
             }
         }
 
-        // ========== ADICIONAR ESTE MÉTODO ==========
         [HttpGet("test-connection")]
         public IActionResult TestConnection()
         {
@@ -60,13 +59,18 @@ namespace GerenciadorPresenca.Controllers
             {
                 var connString = _context.Database.GetConnectionString();
                 
+                if (string.IsNullOrEmpty(connString))
+                {
+                    return BadRequest(new { error = "Connection string está vazia!" });
+                }
+                
                 // Não mostrar a senha completa
-                var safe = connString?.Substring(0, Math.Min(50, connString.Length ?? 0)) + "...";
+                var safe = connString.Substring(0, Math.Min(50, connString.Length)) + "...";
                 
                 return Ok(new { 
                     message = "Connection string encontrada!",
                     preview = safe,
-                    length = connString?.Length ?? 0
+                    length = connString.Length
                 });
             }
             catch (Exception ex)
@@ -76,7 +80,6 @@ namespace GerenciadorPresenca.Controllers
                     type = ex.GetType().Name
                 });
             }
-        }
-        // ===========================================
+        } 
     }
 }
