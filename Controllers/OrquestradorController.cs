@@ -8,7 +8,7 @@ using GerenciadorPresenca.Model;
 using GerenciadorPresenca.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;  // ← ADICIONAR
+using Microsoft.EntityFrameworkCore;
 
 namespace GerenciadorPresenca.Controllers
 {
@@ -17,12 +17,12 @@ namespace GerenciadorPresenca.Controllers
     public class OrquestradorController : Controller
     {
         private readonly IGerenciadorService _service;
-        private readonly AppDbContext _context;  // ← ADICIONAR
+        private readonly AppDbContext _context;
 
-        public OrquestradorController(IGerenciadorService service, AppDbContext context)  // ← ADICIONAR context aqui
+        public OrquestradorController(IGerenciadorService service, AppDbContext context)
         {           
             _service = service;
-            _context = context;  // ← ADICIONAR
+            _context = context;
         }
 
         [HttpPost("confirmar")]
@@ -51,5 +51,32 @@ namespace GerenciadorPresenca.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        // ========== ADICIONAR ESTE MÉTODO ==========
+        [HttpGet("test-connection")]
+        public IActionResult TestConnection()
+        {
+            try
+            {
+                var connString = _context.Database.GetConnectionString();
+                
+                // Não mostrar a senha completa
+                var safe = connString?.Substring(0, Math.Min(50, connString.Length ?? 0)) + "...";
+                
+                return Ok(new { 
+                    message = "Connection string encontrada!",
+                    preview = safe,
+                    length = connString?.Length ?? 0
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { 
+                    error = ex.Message,
+                    type = ex.GetType().Name
+                });
+            }
+        }
+        // ===========================================
     }
 }
