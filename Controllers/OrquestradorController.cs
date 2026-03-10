@@ -82,6 +82,41 @@ namespace GerenciadorPresenca.Controllers
                     stackTrace = ex.StackTrace
                 });
             }
-        } 
+        }
+
+        [HttpGet("test-db-details")]
+        public async Task<IActionResult> TestDatabaseDetails()
+        {
+            try
+            {
+                var connString = _context.Database.GetConnectionString();
+                
+                // Tentar conectar e pegar mais detalhes
+                var canConnect = false;
+                string errorDetail = "";
+                
+                try
+                {
+                    canConnect = await _context.Database.CanConnectAsync();
+                }
+                catch (Exception dbEx)
+                {
+                    errorDetail = dbEx.Message + " | InnerException: " + dbEx.InnerException?.Message;
+                }
+                
+                return Ok(new { 
+                    connectionString = connString?.Replace(":bp9PrQi6cNCQNDlnrWe8GABL7r3cd1hs", ":****"),
+                    canConnect = canConnect,
+                    errorIfAny = errorDetail
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { 
+                    error = ex.Message,
+                    innerError = ex.InnerException?.Message
+                });
+            }
+        }
     }
 }
