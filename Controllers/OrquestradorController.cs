@@ -8,6 +8,7 @@ using GerenciadorPresenca.Model;
 using GerenciadorPresenca.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;  // ← ADICIONAR
 
 namespace GerenciadorPresenca.Controllers
 {
@@ -16,10 +17,14 @@ namespace GerenciadorPresenca.Controllers
     public class OrquestradorController : Controller
     {
         private readonly IGerenciadorService _service;
-        public OrquestradorController( IGerenciadorService service)
+        private readonly AppDbContext _context;  // ← ADICIONAR
+
+        public OrquestradorController(IGerenciadorService service, AppDbContext context)  // ← ADICIONAR context aqui
         {           
             _service = service;
+            _context = context;  // ← ADICIONAR
         }
+
         [HttpPost("confirmar")]
         public async Task<IActionResult> ConfirmarPresenca(Convidado convidado)
         {
@@ -31,6 +36,20 @@ namespace GerenciadorPresenca.Controllers
         public async Task<IActionResult> ConsultarConvidados()
         {
             return Ok(await _service.ListarConvidados());
+        }
+        
+        [HttpPost("migrate")]
+        public async Task<IActionResult> ApplyMigrations()
+        {
+            try
+            {
+                await _context.Database.MigrateAsync();
+                return Ok(new { message = "Migrations aplicadas com sucesso!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
         }
     }
 }
