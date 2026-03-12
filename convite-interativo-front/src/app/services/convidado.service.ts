@@ -12,7 +12,7 @@ export interface Convidado {
   providedIn: 'root',
 })
 export class ConvidadoService {
-  private apiUrl = 'http://localhost:5000/gerenciadorPresenca';
+  private apiUrl = 'https://api-convite-aaaaf7hhh7f6ajfg.brazilsouth-01.azurewebsites.net/gerenciadorPresenca';
 
   constructor(private http: HttpClient) {}
 
