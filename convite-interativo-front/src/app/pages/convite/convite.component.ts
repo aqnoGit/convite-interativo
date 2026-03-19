@@ -14,7 +14,7 @@ export class ConviteComponent {
   mensagem: string = '';
   showMensagem: boolean = false;
 
-  constructor(private convidadoService: ConvidadoService) {}
+  constructor(private convidadoService: ConvidadoService) { }
 
   confirmarPresenca() {
     if (!this.nomeConvidado.trim()) {
@@ -46,5 +46,17 @@ export class ConviteComponent {
   mostrarMensagem(msg: string, sucesso: boolean) {
     this.mensagem = msg;
     this.showMensagem = true;
+  }
+
+  modalAberta = false;
+  modalTipo: 'local' | 'presentes' | null = null;
+
+  abrirModal() {
+    this.modalAberta = true;
+  }
+
+  fecharModal() {
+    this.modalAberta = false;
+    this.modalTipo = null;
   }
 }
