@@ -41,3 +41,18 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# .NET Build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.FileListAbsolute.txt
+*.AssemblyInfoInputs.cache
+*.assets.cache
+*.GeneratedMSBuildEditorConfig.cache
+*.genruntimeconfig.cache
+*.MvcApplicationPartsAssemblyInfo.cache
+appsettings.Development.json
