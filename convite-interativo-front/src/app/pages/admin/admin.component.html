@@ -37,15 +37,13 @@
         <thead>
           <tr class="border-b-2" style="border-color: #DBBCE3;">
             <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Nome</th>
-            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Nome Criança</th>
-            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Tipo</th>
+            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Convidado</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let convidado of convidados" class="border-b hover:bg-purple-50 transition-colors"
             style="border-color: #f3e8ff;">
-            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nome ?? '—' }}</td>
-            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nomeCrianca ?? '—' }}</td>
+            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nome ?? convidado.nomeCrianca }}</td>
             <td class="py-3 px-4">
               <span class="px-3 py-1 rounded-full text-sm font-semibold"
                 [style.background]="convidado.nomeCrianca ? '#fce7f3' : '#f3e8ff'"
@@ -58,20 +56,15 @@
       </table>
 
       <!-- Cards (mobile) -->
-      <!-- Cards (mobile) -->
-      <div *ngIf="convidados.length > 0" class="md:hidden space-y-3">
-
-        <!-- Header mobile -->
-        <div class="grid grid-cols-3 pb-2 border-b-2" style="border-color: #DBBCE3;">
+      <div *ngIf="convidados.length > 0" class="md:hidden">
+        <div class="grid grid-cols-2 pb-2 border-b-2" style="border-color: #DBBCE3;">
           <span class="text-xs font-semibold py-2 px-3" style="color: #b87fd4;">Nome</span>
-          <span class="text-xs font-semibold py-2 px-3" style="color: #b87fd4;">Nome Criança</span>
-          <span class="text-xs font-semibold py-2 px-3" style="color: #b87fd4;">Tipo</span>
+          <span class="text-xs font-semibold py-2 px-3" style="color: #b87fd4;">Convidado</span>
         </div>
 
-        <div *ngFor="let convidado of convidados" class="grid grid-cols-3 border-b items-center"
+        <div *ngFor="let convidado of convidados" class="grid grid-cols-2 border-b items-center"
           style="border-color: #f3e8ff;">
-          <span class="py-3 px-3 text-gray-800 font-medium text-sm">{{ convidado.nome ?? '—' }}</span>
-          <span class="py-3 px-3 text-gray-800 font-medium text-sm">{{ convidado.nomeCrianca ?? '—' }}</span>
+          <span class="py-3 px-3 text-gray-800 font-medium text-sm">{{ convidado.nome ?? convidado.nomeCrianca }}</span>
           <span class="py-3 px-3">
             <span class="px-2 py-1 rounded-full text-xs font-semibold"
               [style.background]="convidado.nomeCrianca ? '#fce7f3' : '#f3e8ff'"
@@ -80,9 +73,7 @@
             </span>
           </span>
         </div>
-
       </div>
-
     </div>
   </div>
 </div>
