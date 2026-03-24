@@ -12,12 +12,18 @@ export class AdminComponent implements OnInit {
   convidados: Convidado[] = [];
   carregando: boolean = true;
 
-  constructor(private convidadoService: ConvidadoService) {}
+  constructor(private convidadoService: ConvidadoService) { }
 
   ngOnInit() {
     this.carregarConvidados();
   }
+  get totalAdultos(): number {
+    return this.convidados.filter(c => !c.nomeCrianca).length;
+  }
 
+  get totalCriancas(): number {
+    return this.convidados.filter(c => !!c.nomeCrianca).length;
+  }
   carregarConvidados() {
     this.convidadoService.getConvidados().subscribe({
       next: (data) => {

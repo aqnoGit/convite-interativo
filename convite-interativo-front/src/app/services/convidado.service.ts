@@ -4,26 +4,24 @@ import { Observable } from 'rxjs';
 
 export interface Convidado {
   id?: number;
-  nome: string;
-  confirmado: boolean;
+  nome: string | null;
+  nomeCrianca: string | null;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConvidadoService {
-   private apiUrl = 'https://api-convite-aaaaf7hhh7f6ajfg.brazilsouth-01.azurewebsites.net/gerenciadorPresenca';
-  // private apiUrl = 'http://localhost:5000/gerenciadorPresenca';
+  // private apiUrl = 'https://api-convite-aaaaf7hhh7f6ajfg.brazilsouth-01.azurewebsites.net/gerenciadorPresenca';
+  private apiUrl = 'http://localhost:5000/gerenciadorPresenca';
 
   constructor(private http: HttpClient) {}
 
-  // Listar todos os convidados
   getConvidados(): Observable<Convidado[]> {
     return this.http.get<Convidado[]>(`${this.apiUrl}/consultar`);
   }
 
-  // Adicionar novo convidado
-  addConvidado(convidado: Convidado): Observable<Convidado> {
-    return this.http.post<any>(`${this.apiUrl}/confirmar`, convidado);
+  confirmar(convidados: Convidado[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/confirmar`, convidados);
   }
 }

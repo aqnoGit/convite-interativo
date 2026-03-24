@@ -1,52 +1,68 @@
-<div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8">
+<div class="min-h-screen p-8" style="background: linear-gradient(to bottom, #f3e8ff, #fce7f3);">
   <div class="max-w-4xl mx-auto">
+
     <!-- Cabeçalho -->
-    <h1 class="text-4xl font-bold text-center text-blue-800 mb-8">Convidados Confirmados 🎉</h1>
+    <h1 class="text-4xl font-bold text-center mb-2" style="color: #b87fd4;">
+      Convidados Confirmados
+    </h1>
+    <p class="text-center text-sm mb-8" style="color: #c084fc;">Lista de presenças confirmadas</p>
+
+    <!-- Cards de contadores -->
+    <div class="grid grid-cols-3 gap-4 mb-8">
+      <div class="bg-white rounded-2xl shadow p-4 text-center">
+        <p class="text-3xl font-bold" style="color: #b87fd4;">{{ convidados.length }}</p>
+        <p class="text-sm font-semibold text-gray-500 mt-1">Total</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-4 text-center">
+        <p class="text-3xl font-bold" style="color: #818cf8;">{{ totalAdultos }}</p>
+        <p class="text-sm font-semibold text-gray-500 mt-1">Adultos</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-4 text-center">
+        <p class="text-3xl font-bold" style="color: #f472b6;">{{ totalCriancas }}</p>
+        <p class="text-sm font-semibold text-gray-500 mt-1">Crianças</p>
+      </div>
+    </div>
 
     <!-- Loading -->
-    <div *ngIf="carregando" class="text-center text-gray-600">Carregando...</div>
+    <div *ngIf="carregando" class="text-center" style="color: #b87fd4;">Carregando...</div>
 
     <!-- Lista de convidados -->
-    <div *ngIf="!carregando" class="bg-white rounded-lg shadow-lg p-6">
-      <!-- Se não tiver nenhum convidado -->
+    <div *ngIf="!carregando" class="bg-white rounded-2xl shadow-lg p-6">
       <p *ngIf="convidados.length === 0" class="text-center text-gray-500">
         Nenhum convidado confirmou presença ainda.
       </p>
 
-      <!-- Tabela de convidados -->
       <table *ngIf="convidados.length > 0" class="w-full">
         <thead>
-          <tr class="border-b-2 border-blue-200">
-            <th class="text-left py-3 px-4 text-blue-800 font-semibold">ID</th>
-            <th class="text-left py-3 px-4 text-blue-800 font-semibold">Nome</th>
-            <th class="text-left py-3 px-4 text-blue-800 font-semibold">Status</th>
+          <tr class="border-b-2" style="border-color: #DBBCE3;">
+            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">ID</th>
+            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Nome</th>
+            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Nome Criança</th>
+            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Convidado</th>
           </tr>
         </thead>
         <tbody>
           <tr
             *ngFor="let convidado of convidados"
-            class="border-b border-gray-200 hover:bg-blue-50"
+            class="border-b hover:bg-purple-50 transition-colors"
+            style="border-color: #f3e8ff;"
           >
-            <td class="py-3 px-4 text-gray-700">{{ convidado.id }}</td>
-            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nome }}</td>
+            <td class="py-3 px-4 text-gray-500 text-sm">{{ convidado.id }}</td>
+            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nome ?? '—' }}</td>
+            <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nomeCrianca ?? '—' }}</td>
             <td class="py-3 px-4">
               <span
                 class="px-3 py-1 rounded-full text-sm font-semibold"
-                [class]="
-                  convidado.confirmado ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                "
+                [style.background]="convidado.nomeCrianca ? '#fce7f3' : '#f3e8ff'"
+                [style.color]="convidado.nomeCrianca ? '#db2777' : '#9333ea'"
               >
-                {{ convidado.confirmado ? '✅ Confirmado' : '❌ Não confirmado' }}
+                {{ convidado.nomeCrianca ?  'Criança' : 'Adulto' }}
               </span>
             </td>
           </tr>
         </tbody>
       </table>
-
-      <!-- Total de convidados -->
-      <div *ngIf="convidados.length > 0" class="mt-6 text-center text-gray-600">
-        <strong>Total:</strong> {{ convidados.length }} convidado(s)
-      </div>
     </div>
+
   </div>
 </div>
