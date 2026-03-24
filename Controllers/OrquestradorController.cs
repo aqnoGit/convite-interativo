@@ -32,5 +32,8 @@ namespace GerenciadorPresenca.Controllers
         {
             return Ok(await _service.ListarConvidados());
         }
+
+        [HttpGet("ping")]
+        public IActionResult Ping() => Ok("pong");
     }
 }
