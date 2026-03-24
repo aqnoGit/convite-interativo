@@ -1,25 +1,25 @@
-<div class="min-h-screen p-8" style="background: linear-gradient(to bottom, #f3e8ff, #fce7f3);">
+<div class="min-h-screen p-4 md:p-8" style="background: linear-gradient(to bottom, #f3e8ff, #fce7f3);">
   <div class="max-w-4xl mx-auto">
 
     <!-- Cabeçalho -->
-    <h1 class="text-4xl font-bold text-center mb-2" style="color: #b87fd4;">
+    <h1 class="text-2xl md:text-4xl font-bold text-center mb-2" style="color: #b87fd4;">
       Convidados Confirmados
     </h1>
-    <p class="text-center text-sm mb-8" style="color: #c084fc;">Lista de presenças confirmadas</p>
+    <p class="text-center text-sm mb-6" style="color: #c084fc;">Lista de presenças confirmadas</p>
 
     <!-- Cards de contadores -->
-    <div class="grid grid-cols-3 gap-4 mb-8">
-      <div class="bg-white rounded-2xl shadow p-4 text-center">
-        <p class="text-3xl font-bold" style="color: #b87fd4;">{{ convidados.length }}</p>
-        <p class="text-sm font-semibold text-gray-500 mt-1">Total</p>
+    <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6">
+      <div class="bg-white rounded-2xl shadow p-3 md:p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold" style="color: #b87fd4;">{{ convidados.length }}</p>
+        <p class="text-xs md:text-sm font-semibold text-gray-500 mt-1">Total</p>
       </div>
-      <div class="bg-white rounded-2xl shadow p-4 text-center">
-        <p class="text-3xl font-bold" style="color: #818cf8;">{{ totalAdultos }}</p>
-        <p class="text-sm font-semibold text-gray-500 mt-1">Adultos</p>
+      <div class="bg-white rounded-2xl shadow p-3 md:p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold" style="color: #818cf8;">{{ totalAdultos }}</p>
+        <p class="text-xs md:text-sm font-semibold text-gray-500 mt-1">Adultos</p>
       </div>
-      <div class="bg-white rounded-2xl shadow p-4 text-center">
-        <p class="text-3xl font-bold" style="color: #f472b6;">{{ totalCriancas }}</p>
-        <p class="text-sm font-semibold text-gray-500 mt-1">Crianças</p>
+      <div class="bg-white rounded-2xl shadow p-3 md:p-4 text-center">
+        <p class="text-2xl md:text-3xl font-bold" style="color: #f472b6;">{{ totalCriancas }}</p>
+        <p class="text-xs md:text-sm font-semibold text-gray-500 mt-1">Crianças</p>
       </div>
     </div>
 
@@ -27,42 +27,56 @@
     <div *ngIf="carregando" class="text-center" style="color: #b87fd4;">Carregando...</div>
 
     <!-- Lista de convidados -->
-    <div *ngIf="!carregando" class="bg-white rounded-2xl shadow-lg p-6">
+    <div *ngIf="!carregando" class="bg-white rounded-2xl shadow-lg p-4 md:p-6">
       <p *ngIf="convidados.length === 0" class="text-center text-gray-500">
         Nenhum convidado confirmou presença ainda.
       </p>
 
-      <table *ngIf="convidados.length > 0" class="w-full">
+      <!-- Tabela (desktop) -->
+      <table *ngIf="convidados.length > 0" class="w-full hidden md:table">
         <thead>
           <tr class="border-b-2" style="border-color: #DBBCE3;">
-            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">ID</th>
             <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Nome</th>
             <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Nome Criança</th>
-            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Convidado</th>
+            <th class="text-left py-3 px-4 font-semibold" style="color: #b87fd4;">Tipo</th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let convidado of convidados"
+          <tr *ngFor="let convidado of convidados"
             class="border-b hover:bg-purple-50 transition-colors"
-            style="border-color: #f3e8ff;"
-          >
-            <td class="py-3 px-4 text-gray-500 text-sm">{{ convidado.id }}</td>
+            style="border-color: #f3e8ff;">
             <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nome ?? '—' }}</td>
             <td class="py-3 px-4 text-gray-800 font-medium">{{ convidado.nomeCrianca ?? '—' }}</td>
             <td class="py-3 px-4">
-              <span
-                class="px-3 py-1 rounded-full text-sm font-semibold"
+              <span class="px-3 py-1 rounded-full text-sm font-semibold"
                 [style.background]="convidado.nomeCrianca ? '#fce7f3' : '#f3e8ff'"
-                [style.color]="convidado.nomeCrianca ? '#db2777' : '#9333ea'"
-              >
-                {{ convidado.nomeCrianca ?  'Criança' : 'Adulto' }}
+                [style.color]="convidado.nomeCrianca ? '#db2777' : '#9333ea'">
+                {{ convidado.nomeCrianca ? 'Criança' : 'Adulto' }}
               </span>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
 
+      <!-- Cards (mobile) -->
+      <div *ngIf="convidados.length > 0" class="md:hidden space-y-3">
+        <div *ngFor="let convidado of convidados"
+          class="border rounded-xl p-3 flex items-center justify-between"
+          style="border-color: #DBBCE3;">
+          <div>
+            <p class="font-semibold text-gray-800 text-sm">{{ convidado.nome ?? convidado.nomeCrianca }}</p>
+            <p *ngIf="convidado.nomeCrianca" class="text-xs text-gray-400 mt-0.5">
+              Criança
+            </p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-semibold"
+            [style.background]="convidado.nomeCrianca ? '#fce7f3' : '#f3e8ff'"
+            [style.color]="convidado.nomeCrianca ? '#db2777' : '#9333ea'">
+            {{ convidado.nomeCrianca ? 'Criança' : 'Adulto' }}
+          </span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

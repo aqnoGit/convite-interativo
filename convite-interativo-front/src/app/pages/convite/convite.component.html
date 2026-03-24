@@ -120,14 +120,15 @@
             </div>
 
             <!-- Botão confirmar -->
-            <button (click)="confirmarPresenca()"
-              class="w-full text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-base cursor-pointer"
+            <button (click)="confirmarPresenca()" [disabled]="carregando"
+              class="w-full text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all duration-200 text-base cursor-pointer"
               style="background: linear-gradient(to right, #DBBCE3, #b87fd4);">
-              Confirmar
+              <span *ngIf="!carregando">Confirmar</span>
+              <span *ngIf="carregando"> Carregando...</span>
             </button>
           </div>
 
-          <div *ngIf="showMensagem" class="border-2 rounded-xl p-2 text-center"
+          <div *ngIf="showMensagem" class="border-2 rounded-xl p-2 text-center mt-4"
             [class]="erroMensagem ? 'bg-red-100 border-red-500' : 'bg-green-100 border-green-500'">
             <p class="font-bold text-sm" [class]="erroMensagem ? 'text-red-700' : 'text-green-700'">
               {{ mensagem }}

@@ -14,6 +14,7 @@ export class ConviteComponent {
   mensagem: string = '';
   showMensagem: boolean = false;
   erroMensagem = false;
+  carregando = false;
 
   modalAberta = false;
   modalTipo: 'local' | 'presentes' | null = null;
@@ -57,15 +58,17 @@ export class ConviteComponent {
         convidados.push({ nome: null, nomeCrianca: nomeCrianca.trim() });
       });
     }
-
+    this.carregando = true;
     // Envia
     this.convidadoService.confirmar(convidados).subscribe({
       next: () => {
         this.mostrarMensagem('Presença confirmada! Te esperamos na festa!');
         this.limparFormulario();
+         this.carregando = false;
       },
       error: () => {
         this.mostrarMensagem('Erro ao confirmar presença. Tente novamente!', true);
+        this.carregando = false;
       }
     });
   }
