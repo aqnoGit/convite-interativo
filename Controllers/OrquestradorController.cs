@@ -34,6 +34,7 @@ namespace GerenciadorPresenca.Controllers
         }
 
         [HttpGet("ping")]
+        [HttpHead("ping")]
         public IActionResult Ping() => Ok("pong");
     }
 }
