@@ -13,6 +13,7 @@ export class ConviteComponent {
   nomeConvidado: string = '';
   mensagem: string = '';
   showMensagem: boolean = false;
+  erroMensagem = false;
 
   modalAberta = false;
   modalTipo: 'local' | 'presentes' | null = null;
@@ -28,15 +29,15 @@ export class ConviteComponent {
   confirmarPresenca() {
     // Validações
     if (!this.nomeConvidado.trim()) {
-      this.mostrarMensagem('Por favor, digite seu nome!');
+      this.mostrarMensagem('Por favor, digite seu nome!', true);
       return;
     }
     if (this.vaiComAdultos && this.nomesAdultos.some(n => !n.trim())) {
-      this.mostrarMensagem('Por favor, preencha o nome de todos os acompanhantes!');
+      this.mostrarMensagem('Por favor, preencha o nome de todos os acompanhantes!', true);
       return;
     }
     if (this.vaiComCrianca && this.nomesCriancas.some(n => !n.trim())) {
-      this.mostrarMensagem('Por favor, preencha o nome de todas as crianças!');
+      this.mostrarMensagem('Por favor, preencha o nome de todas as crianças!', true);
       return;
     }
 
@@ -60,11 +61,11 @@ export class ConviteComponent {
     // Envia
     this.convidadoService.confirmar(convidados).subscribe({
       next: () => {
-        this.mostrarMensagem('🎉 Presença confirmada! Te esperamos na festa!');
+        this.mostrarMensagem('Presença confirmada! Te esperamos na festa!');
         this.limparFormulario();
       },
       error: () => {
-        this.mostrarMensagem('Erro ao confirmar presença. Tente novamente!');
+        this.mostrarMensagem('Erro ao confirmar presença. Tente novamente!', true);
       }
     });
   }
@@ -72,9 +73,10 @@ export class ConviteComponent {
   trackByIndex(index: number): number {
     return index;
   }
-  
-  mostrarMensagem(msg: string) {
+
+  mostrarMensagem(msg: string, erro: boolean = false) {
     this.mensagem = msg;
+    this.erroMensagem = erro;
     this.showMensagem = true;
     setTimeout(() => this.showMensagem = false, 3000);
   }

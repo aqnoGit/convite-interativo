@@ -127,9 +127,11 @@
             </button>
           </div>
 
-          <!-- Mensagem de sucesso/erro -->
-          <div *ngIf="showMensagem" class="bg-green-100 border-2 border-green-500 rounded-xl p-2 text-center">
-            <p class="text-green-700 font-bold text-sm">{{ mensagem }}</p>
+          <div *ngIf="showMensagem" class="border-2 rounded-xl p-2 text-center"
+            [class]="erroMensagem ? 'bg-red-100 border-red-500' : 'bg-green-100 border-green-500'">
+            <p class="font-bold text-sm" [class]="erroMensagem ? 'text-red-700' : 'text-green-700'">
+              {{ mensagem }}
+            </p>
           </div>
         </div>
       </div>
