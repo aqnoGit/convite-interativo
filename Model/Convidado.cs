@@ -7,8 +7,8 @@ namespace GerenciadorPresenca.Model
 {
     public class Convidado
     {
-        public int Id{get; set;}
+        public int Id { get; set; }
         public string? Nome { get; set; }
-        public bool Confirmado { get; set; }
+        public string? NomeCrianca { get; set; }
     }
 }

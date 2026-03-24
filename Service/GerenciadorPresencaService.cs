@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GerenciadorPresenca.Data;
 using GerenciadorPresenca.Model;
 using Microsoft.EntityFrameworkCore;
@@ -16,17 +12,16 @@ namespace GerenciadorPresenca.Service
         {
             _appDbContext = appDbContext;
         }
-        public async Task<Convidado> Confirmar(Convidado convidado)
+
+        public async Task Confirmar(List<Convidado> convidados)
         {
-            _appDbContext.Convidados.Add(convidado);
+            _appDbContext.Convidados.AddRange(convidados);
             await _appDbContext.SaveChangesAsync();
-            return convidado;
         }
 
         public async Task<List<Convidado>> ListarConvidados()
         {
             return await _appDbContext.Convidados.ToListAsync();
         }
-
     }
 }

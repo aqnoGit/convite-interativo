@@ -8,7 +8,7 @@ namespace GerenciadorPresenca.Service
 {
     public interface IGerenciadorService
     {
-        Task<Convidado> Confirmar(Convidado convidado);
+        Task Confirmar(List<Convidado> convidados);
         Task<List<Convidado>> ListarConvidados();
     }
 }

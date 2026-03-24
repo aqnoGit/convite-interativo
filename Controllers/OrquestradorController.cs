@@ -21,10 +21,10 @@ namespace GerenciadorPresenca.Controllers
             _service = service;
         }
         [HttpPost("confirmar")]
-        public async Task<IActionResult> ConfirmarPresenca(Convidado convidado)
+        public async Task<IActionResult> ConfirmarPresenca(List<Convidado> convidados)
         {
-            await _service.Confirmar(convidado);
-            return Ok(new{message = "Confrimação feita com sucesso"});
+            await _service.Confirmar(convidados);
+            return Ok(new { message = "Confirmação feita com sucesso" });
         }
 
         [HttpGet("consultar")]
